@@ -327,3 +327,34 @@ int printName(int a) { }
 float printName(int b) { }
 double printName(int c) { }
 ```
+
+## Recursion
+
+A function that calls itself.
+
+Recursion is a method of solving a problem where the solution depends on the solutions to smaller instances of the same problem.
+
+```cpp
+// 4! = 4 * 3 * 2 * 1 = 24
+
+int factorial(int n) {
+  if (n==1) {
+    return 1;
+  }
+  else {
+    return n * factorial(n-1);
+  }
+}
+
+int main() {
+  cout << factorial(5);
+}
+
+//Outputs 120
+```
+A **base case (exit condition)** is necessary for real recursion. Without it, the recursion will keep running forever.
+
+**Visualization**
+
+![GIF](https://media.giphy.com/media/RHPxe7KPnb8KaAtBbE/giphy.gif)
+
