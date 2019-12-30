@@ -167,8 +167,7 @@ delete p; // free up the memory
 p = new int; // reuse for a new address
 ```
 
-**NULL**
-The NULL pointer is a constant with a value of zero. It's a good practice to assign __NULL__ to a pointer variable while declaring.
+**NULL** is a constant with a value of zero. It's a good practice to assign __NULL__ to a pointer variable while declaring.
 
 **For arrays**
 ```cpp
