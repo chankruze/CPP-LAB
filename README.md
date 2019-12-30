@@ -338,7 +338,7 @@ Recursion is a method of solving a problem where the solution depends on the sol
 // 4! = 4 * 3 * 2 * 1 = 24
 
 int factorial(int n) {
-  if (n==1) {
+  if (n == 1) {
     return 1;
   }
   else {
@@ -358,3 +358,20 @@ A **base case (exit condition)** is necessary for real recursion. Without it, th
 
 ![GIF](https://media.giphy.com/media/RHPxe7KPnb8KaAtBbE/giphy.gif)
 
+
+## Passing Array to Function
+
+```cpp
+// 1
+void printArray(int arr[], int size) {
+  for(int x = 0; x < size; x++) {
+    cout << arr[x] << endl;
+  }
+}
+
+int main() {
+  int myArr[3] = {42, 33, 88};
+  printArray(myArr, 3);
+}
+```
+We can't use `sizeof(arr)` in `printArray()` beacuse `sizeof` on array function parameter `arr` will return size of `int*`.
