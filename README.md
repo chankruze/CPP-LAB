@@ -175,3 +175,155 @@ int *p = NULL; // Pointer initialized with null
 p = new int[20]; // Request memory
 delete [] p; // Delete array pointed to by p
 ```
+
+## Functions
+
+Function declaration is required when you define a function in one source file and you call that function in another file. In such case, you should declare the function at the top of the file calling the function.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+//Function declaration
+void printSomething();
+
+int main() {
+  printSomething();
+
+  return 0;
+}
+
+//Function definition
+void printSomething() {
+  cout << "Hi there!";
+}
+```
+Data type and name should be defined for each parameter.
+
+multiple parameters are separated with commas, both when declaring them and when passing the arguments.
+
+**Formal parameters** are created upon entering the function, and are destroyed upon exiting the function.
+
+Making changes to the parameter within the function does not alter the argument.
+
+## Default Values for Parameters
+
+```cpp
+int volume(int l = 1, int w = 1, int h = 1) {
+  return l * w * h;
+}
+
+int main() {
+  cout << volume() << endl;
+  cout << volume(5) << endl;
+  cout << volume(2, 3) << endl;
+  cout << volume(3, 7, 6) << endl;
+}
+
+/* Output
+1
+5
+6
+126
+*/
+```
+
+## Random Numbers
+
+**Include**: C++ standard library `<cstdlib>`
+
+### pseudo random numbers
+
+**Function name**: `rand()`
+
+This means that each time the code is run, it generates the same numbers.
+
+```cpp
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+
+int main() {
+  cout << rand();
+}
+```
+
+**modulo (%)** operator can be used to generate random numbers within a specific range.
+
+```cpp
+for (int x = 1; x <= 10; x++) {
+  // in range 1 to 10 (inclusive)
+  cout << 1 + (rand() % 10) << endl;
+}
+```
+
+**Function name**: `srand()`
+
+This function allows to specify a seed value as its parameter, which is used for the rand() function's algorithm.
+
+Changing the **seed** value changes the return of rand(). However, the same seed will result in the same output.
+
+```cpp
+srand(98);
+
+for (int x = 1; x <= 10; x++) {
+  cout << 1 + (rand() % 6) << endl;
+}
+```
+
+### truly random numbers
+
+A solution to generate truly random numbers, is to use the current time as a seed value for the srand() function.
+
+`time(0)` returns the current second count.
+
+```cpp
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+int main () {
+  srand(time(0));
+
+  for (int x = 1; x <= 10; x++) {
+    cout << 1 + (rand() % 6) << endl;
+  }
+}
+```
+
+## Function Overloading
+
+Function overloading allows to create multiple functions with the same name, so long as they have different parameters.
+
+When overloading functions, the definition of the function must differ from each other by the types and/or the number of arguments in the argument list.
+
+Example:
+```cpp
+void printNumber(int x) {
+    cout << "Prints an integer: " << x << endl;
+}
+void printNumber(float x) {
+    cout << "Prints a float: " << x << endl;
+}
+int main() {
+  int a = 16;
+  float b = 54.541;
+  printNumber(a);
+  printNumber(b);
+}
+
+/* Output:  
+Prints an integer: 16
+Prints a float: 54.541
+*/
+```
+
+You can not overload function declarations that differ only by return type.
+
+```cpp
+// Wrong
+int printName(int a) { }
+float printName(int b) { }
+double printName(int c) { }
+```
