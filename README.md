@@ -206,7 +206,7 @@ multiple parameters are separated with commas, both when declaring them and when
 
 Making changes to the parameter within the function does not alter the argument.
 
-## Default Values for Parameters
+### Default Values for Parameters
 
 ```cpp
 int volume(int l = 1, int w = 1, int h = 1) {
@@ -228,11 +228,11 @@ int main() {
 */
 ```
 
-## Random Numbers
+### Random Numbers
 
 **Include**: C++ standard library `<cstdlib>`
 
-### pseudo random numbers
+#### pseudo random numbers
 
 **Function name**: `rand()`
 
@@ -271,7 +271,7 @@ for (int x = 1; x <= 10; x++) {
 }
 ```
 
-### truly random numbers
+#### truly random numbers
 
 A solution to generate truly random numbers, is to use the current time as a seed value for the srand() function.
 
@@ -292,7 +292,7 @@ int main () {
 }
 ```
 
-## Function Overloading
+### Function Overloading
 
 Function overloading allows to create multiple functions with the same name, so long as they have different parameters.
 
@@ -328,7 +328,7 @@ float printName(int b) { }
 double printName(int c) { }
 ```
 
-## Recursion
+### Recursion
 
 A function that calls itself.
 
@@ -359,7 +359,7 @@ A **base case (exit condition)** is necessary for real recursion. Without it, th
 ![GIF](https://media.giphy.com/media/RHPxe7KPnb8KaAtBbE/giphy.gif)
 
 
-## Passing Array to Function
+### Passing Array to Function
 
 ```cpp
 // 1
@@ -375,3 +375,172 @@ int main() {
 }
 ```
 We can't use `sizeof(arr)` in `printArray()` beacuse `sizeof` on array function parameter `arr` will return size of `int*`.
+
+### Passing by Reference
+
+Pass-by-reference copies an argument's address into the formal parameter. Inside the function, the address is used to access the actual argument used in the call. This means that changes made to the parameter affect the argument.
+
+To pass the value by reference, argument pointers are passed to the functions just like any other value.
+
+```cpp
+void myFunc(int *x) {
+  *x = 100;
+}
+
+int main() {
+  int var = 20;
+  myFunc(&var);
+  cout << var;
+}
+// Outputs 100
+```
+
+In general, passing by value is faster and more effective. Pass by reference when your function needs to modify the argument, or when you need to pass a data type, that uses a lot of memory and is expensive to copy.
+
+## Objects
+
+objects are independent units, and each has its own identity.
+
+- **Identity**: the object type. (ie. car, dogo)
+
+- **Attributes**: characteristics that describes the current state of an object. A.k.a properties or data.
+
+- **Behavior**: what the object does. (ie. moves, barks)
+
+An object's state is independent of its type; a cup might be full of water, another might be empty.
+
+## Class
+
+Object's blueprint which describes what the object will be and separete from object itself.
+
+It specifies only the definition not what the actual data is.
+
+Class has:
+- **identity**: i.e BankAccount
+- **attributes**: i.e accountNumber, balance, dateOpened
+- **behavior**: i.e open(), close(), deposit()
+
+Term `type` is used to refer a class name. Each object is called an instance of a class. The process of creating objects is called __*instantiation*__.
+
+### Methods
+
+ A function that belongs to a class, performs actions and return values.
+
+
+**Class example**
+```cpp
+class BankAccount {
+  public: // access specifier
+    void sayHi() { // method
+      cout << "Hi" << endl;
+    }
+};
+
+int main() {
+  BankAccount test; // instantiation
+  test.sayHi();
+}
+```
+
+### Abstraction
+
+Data abstraction is the concept of providing only essential information to the outside world. It's a process of representing essential features without including implementation details.
+
+Abstraction acts as a foundation for the other object orientation fundamentals, such as __*inheritance*__ and __*polymorphism*__.
+
+### Encapsulation
+
+The idea of "surrounding" an entity, not just to keep what's inside together, but also to protect it.
+
+In OOP it means combining attributes and behavior together within a class and restricting access to the inner workings of that class. A.k.a data hiding.
+
+- ___Control__ the way data is accessed or modified.
+- Code is more __flexible__ and easy to change with new requirements.
+- __Change__ one part of code without affecting other part of code.
+
+If no access specifier is defined, all members of a class are set to **private** by default.
+
+**Public**
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+class myClass {
+  public:
+    string name;
+};
+
+int main() {
+  myClass myObj;
+  myObj.name = "SoloLearn";
+  cout << myObj.name;
+  return 0;
+}
+
+//Outputs "SoloLearn"
+```
+
+**Private**
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+class myClass {
+  public:
+    void setName(string x) {
+      name = x;
+    }
+    string getName() {
+      return name;
+    }
+  private:
+    string name = "Default";
+};
+
+int main() {
+  myClass myObj;
+  myObj.setName("John");
+  cout << myObj.getName() << endl;
+
+  return 0;
+}
+
+//Outputs "John"
+```
+
+### Constructors
+
+Class constructors are special member functions of a class. They are executed whenever new objects are created within that class.
+
+- The constructor's name is identical to that of the class.
+- It has no return type, not even `void`.
+- It's possible to have multiple constructors that take different numbers of parameters.
+
+```cpp
+class myClass {
+  public:
+    myClass() {
+      cout <<"Hey";
+    }
+    void setName(string x) {
+      name = x;
+    }
+    string getName() {
+      return name;
+    }
+  private:
+    string name;
+};
+
+int main() {
+  myClass myObj;
+
+  return 0;
+}
+
+//Outputs "Hey"
+```
