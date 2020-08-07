@@ -75,22 +75,22 @@ void genInvoice(vector<Product> cart) {
     invoice.open(fileName, ios::out | ios::binary);
 
     if (invoice.is_open()) {
-        invoice << "\n\n\t\tBIG BAZAR (GEEKOFIA LTD)" << endl;
-        invoice << "\n\t\t" << date << endl;
-        invoice << "\n\t\tBill ID: " << id << endl;
-        invoice << "\n\t*************** INVOICE ***************" << endl;
-        invoice << "\tS.N.\tTYPE\tPRICE\tDISC\tNET AMT" << endl;
+        invoice << "\n\n\tBIG BAZAR (GEEKOFIA LTD)" << endl;
+        invoice << "\n\t" << date << endl;
+        invoice << "\n\tBill ID: " << id << endl;
+        invoice << "\n*************** INVOICE ***************" << endl;
+        invoice << "S.N.\tTYPE\tPRICE\tDISC\tNET AMT" << endl;
 
         for (unsigned int i = 0; i < cart.size(); i++) {
-            invoice << "\t" << i + 1 << "\t" << cart[i].getType() << "\t" << cart[i].getPurchageAmount() << "\t" << cart[i].getDiscount() << "\t" << cart[i].getNetPrice() << endl;
+            invoice << i + 1 << "\t" << cart[i].getType() << "\t" << cart[i].getPurchageAmount() << "\t" << cart[i].getDiscount() << "\t" << cart[i].getNetPrice() << endl;
 
             totalPurchageAmount += cart[i].getPurchageAmount();
             totalNetPrice += cart[i].getNetPrice();
         }
 
-        invoice << "\n\n\tTOTAL PRICE\t: ₹ " << totalPurchageAmount << endl;
-        invoice << "\tTOTAL DISCOUNT\t: ₹ " << totalPurchageAmount - totalNetPrice << " (" << ((totalPurchageAmount - totalNetPrice) / totalPurchageAmount) * 100 << "%)" << endl;
-        invoice << "\tNET PAYABLE AMT\t: ₹ " << totalNetPrice << endl;
+        invoice << "\n\nTOTAL PRICE\t: ₹ " << totalPurchageAmount << endl;
+        invoice << "TOTAL DISCOUNT\t: ₹ " << totalPurchageAmount - totalNetPrice << " (" << ((totalPurchageAmount - totalNetPrice) / totalPurchageAmount) * 100 << "%)" << endl;
+        invoice << "NET PAYABLE AMT\t: ₹ " << totalNetPrice << endl;
     } else {
         cout << "Couldn't save invoice ;( " << fileName << endl;
     }
@@ -100,7 +100,7 @@ void genInvoice(vector<Product> cart) {
     string line;
     ifstream invoiceScreen(fileName);
     if (invoiceScreen.is_open()) {
-        cout << invoiceScreen.rdbuf();
+        cout << "\t" << invoiceScreen.rdbuf();
         invoiceScreen.close();
         cout << "\nInvoice is saved to " << fileName << endl;
     } else {
