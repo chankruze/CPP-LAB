@@ -63,7 +63,8 @@ void genInvoice(vector<Product> cart) {
     double totalPurchageAmount, totalNetPrice;
 
     srand(time(0));
-    string fileName = "invoice_" + to_string(rand()) + ".dat";
+    int id = rand();
+    string fileName = "invoice_" + to_string(id) + ".dat";
     
     time_t now = time(0);
     char* date = ctime(&now);
@@ -76,6 +77,7 @@ void genInvoice(vector<Product> cart) {
     if (invoice.is_open()) {
         invoice << "\n\n\t\tBIG BAZAR (GEEKOFIA LTD)" << endl;
         invoice << "\n\t\t" << date << endl;
+        invoice << "\n\t\tBill ID: " << id << endl;
         invoice << "\n\t*************** INVOICE ***************" << endl;
         invoice << "\tS.N.\tTYPE\tPRICE\tDISC\tNET AMT" << endl;
 
@@ -100,6 +102,7 @@ void genInvoice(vector<Product> cart) {
     if (invoiceScreen.is_open()) {
         cout << invoiceScreen.rdbuf();
         invoiceScreen.close();
+        cout << "\nInvoice is saved to " << fileName << endl;
     } else {
         cout << "Unable to open file";
     }
