@@ -397,6 +397,42 @@ int main() {
 
 In general, passing by value is faster and more effective. Pass by reference when your function needs to modify the argument, or when you need to pass a data type, that uses a lot of memory and is expensive to copy.
 
+
+## Passing Things (Revised)
+
+- _from **Ken Gregg**, Founder and CEO, Bytellect LLC_
+
+There are three ways to pass things around (into and out of functions) in C++:
+
+### Pass by value
+
+ - A copy of the original object is created and passed.
+ - To pass a string by value, you just use the data type `string`.
+
+### Pass by pointer
+
+ - Only the memory address of the original object is passed. The object’s content is then accessed using pointer notation. It is possible to pass a NULL pointer (i.e., it might point to no object at all).
+ - To pass a string by pointer, you use the data type `string*`.
+
+(Strictly speaking, you’re passing a pointer by value… a copy of the object’s address. But conceptually, you are passing the object by pointer.)
+
+### Pass by reference
+
+ - An alias for the original object is passed. The object’s content is then accessed as if you had the actual object (the reference is an alias for the object). Unlike a pointer, a reference cannot be NULL (i.e., it must refer to an actual object).
+ - To pass a string by reference, you use the data type `string&`.
+
+Behind the scenes, when you pass a reference to an object, a pointer to the object is actually passed. But when you use a reference, you use it as if you had the actual object itself, not a pointer to it.
+
+#### Passing by reference advantages:
+
+ - The efficiency of passing only an address, avoiding the inefficient step of making a copy of the entire object. (Passing by pointer also achieves this.)
+
+ - When working with the reference, you don’t use pointer notation, but just treat the reference as if it were the actual object. (Passing by pointer requires that you use pointer notation to work with the object.)
+
+ - You don’t have to check for NULL, because a reference cannot be NULL. (Passing by pointer has the potential of a NULL pointer arriving.)
+
+ - In some situations, compilers are able to make safe assumptions about a reference that can lead to more efficient generated code than if a pointer were used.
+
 ## Objects
 
 objects are independent units, and each has its own identity.
